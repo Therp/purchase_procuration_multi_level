@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="view_users_form_approve" model="ir.ui.view">
+            <field name="name">view.users.form.approve</field>
+            <field name="inherit_id" ref="base.view_users_form" />
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                 <page string="Access Rights" position="after">
+                    <page string="Procuration">
+                        <group>
+                            <field name="procuration_ids">
+                            	<tree editable="top">
+					            	<field name="name"/>
+					            	<field name="analytic_id"/>
+					            	<field name="procuration_limit_id"/>
+					            	<field name="procuration_limit" 
+					            		readonly="1"/>
+					            	<field name="user_manager_id"/>
+                            	</tree>
+	                        </field>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</openerp>

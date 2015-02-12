@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_purchase_approval,purchase.approval,model_purchase_approval,purchase.group_purchase_user,1,1,1,1
+access_user_res_procuration_limit_user,res.procuration.limit.user,model_res_procuration_limit_user,purchase.group_purchase_user,1,0,0,0
+access_user_res_procuration_limit,res.procuration.limit,model_res_procuration_limit,purchase.group_purchase_user,1,0,0,0
+access_manager_res_procuration_limit_user,res.procuration.limit.user,model_res_procuration_limit_user,group_procuration_manager,1,1,1,1
+access_manager_res_procuration_limit_procuration,res.procuration.limit,model_res_procuration_limit,group_procuration_manager,1,1,1,1

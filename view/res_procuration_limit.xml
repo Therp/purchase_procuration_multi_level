@@ -1,0 +1,52 @@
+<openerp>
+	<data>
+        <!-- Procuration limits -->
+
+        <record id="res_procuration_limit_tree_view" model="ir.ui.view">
+            <field name="name">res.procuration.limit.tree</field>
+            <field name="model">res.procuration.limit</field>
+            <field name="arch" type="xml">
+                <tree string="Procuration limit">
+                    <field name="name"/>
+                    <field name="procuration_limit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_procuration_limit_form_view" model="ir.ui.view">
+            <field name="name">res.procuration.limit.form</field>
+            <field name="model">res.procuration.limit</field>
+            <field name="arch" type="xml">
+                <form string="Procuration limit" version="7.0">
+                  <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="procuration_limit"/>
+                    </group>
+                  </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_res_procuration_limit_tree" model="ir.actions.act_window">
+            <field name="name">Procuration limits</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.procuration.limit</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="res_procuration_limit_tree_view"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new procuration limit.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_res_procuration_limit_tree"
+        		id="menu_res_procuration_limit_form"
+        		parent="account.menu_finance_payables"
+        		sequence="134"
+        		groups="account.group_account_manager"
+        />
+
+	</data>
+</openerp>

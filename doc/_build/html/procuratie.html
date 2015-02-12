@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Purchase_procuration_multi_level 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Purchase_procuration_multi_level 7.0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to Purchase_procuration_multi_level’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Purchase_procuration_multi_level’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Purchase_procuration_multi_level 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="procuratie">
+<h1>Procuratie<a class="headerlink" href="#procuratie" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="doel">
+<h2>Doel<a class="headerlink" href="#doel" title="Permalink to this headline">¶</a></h2>
+<p>Verscheidene functionarissen van het museum mogen bestellingen of opdrachten plaatsen voor een beperkt doel (kostenplaats) en bedrag. Bij overschrijding van het maximale bedrag moet een hogere functionaris accoorderen. Het kan ook zijn, dat het bedrag ook de procuratielimiet van die hogere functionaris overstijgt en dan moet er een nog hogere functionaris accoorderen.</p>
+</div>
+<div class="section" id="werkwijze-openerp">
+<h2>Werkwijze OpenERP<a class="headerlink" href="#werkwijze-openerp" title="Permalink to this headline">¶</a></h2>
+<p>Bepaalde gebruikers kunnen inkoop-offertes aanmaken. Als de offerte is voltooid, wordt deze bevestigd en onstaat een inkooporder. Per product kan een kostenplaats worden gekozen.</p>
+</div>
+<div class="section" id="aanpassing">
+<h2>Aanpassing<a class="headerlink" href="#aanpassing" title="Permalink to this headline">¶</a></h2>
+<p>Per functionaris kan een procuratieregel worden gemaakt met een limiet en een kostenplaats. Voor sommige functionarissen zal er een aantal regels nodig zijn. Per regel wordt aangegeven welke manager bij overschrijding van de limiet kan worden aangesproken.</p>
+<p>De inkoop-offertes krijgen nu als de procuratielimiet wordt overschreden de een status wacht op bevestiging. Pas als een bovengeschikte functionaris met een voldoende hoge limiet de offerte heeft bevestigd ontstaat de inkooporder.
+Functionarissen kunnen eenvoudig de te bevestigen offertes selecteren.</p>
+</div>
+<div class="section" id="inrichten">
+<h2>Inrichten<a class="headerlink" href="#inrichten" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="procuratielimieten">
+<h3>Procuratielimieten<a class="headerlink" href="#procuratielimieten" title="Permalink to this headline">¶</a></h3>
+<p>Definieer de limieten. Deze staan in een aparte tabel, zodat ze eenvoudig kunnen worden opgetrokken.
+Ga naar Instellingen / Procuratielimieten en voer de limieten in.</p>
+<p>Bijvoorbeeld:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>500,00</td>
+<td>standaard</td>
+</tr>
+<tr class="row-even"><td>2500,00</td>
+<td>opdrachten, uitvoeringsgerelateerd</td>
+</tr>
+<tr class="row-odd"><td>5000,00</td>
+<td>inkopen</td>
+</tr>
+<tr class="row-even"><td>5000,00</td>
+<td>investeringen</td>
+</tr>
+<tr class="row-odd"><td>5000,00</td>
+<td>opdrachten, projectgerelateerd</td>
+</tr>
+<tr class="row-even"><td>10000,00</td>
+<td>opdrachten afdelingshoofd,uitvoeringsgerelateerd</td>
+</tr>
+<tr class="row-odd"><td>100000,00</td>
+<td>volledige bevoegdheid</td>
+</tr>
+<tr class="row-even"><td>10000000,00</td>
+<td>ongelimiteerd</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gebruikersprocuratie">
+<h3>Gebruikersprocuratie<a class="headerlink" href="#gebruikersprocuratie" title="Permalink to this headline">¶</a></h3>
+<p>Voer per gebruiker voor elke gewenste kostenplaats een regel in.
+Ga naar Instellingen / Gebruikersprocuratie en voer de regels in.</p>
+<p>Werk top-down, eerst de functionaris met de hoogste procuratie, in dat geval wordt geen manager ingevoerd. Voor elke andere regel wordt een manager verlangd en er wordt gecontroleerd of die een hogere procuratielimiet heeft voor dezelfde kostenplaats.</p>
+<p>Bijvoorbeeld:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="11%" />
+<col width="30%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Raad van t</td>
+<td>Projecten</td>
+<td>Ongelimiteerd</td>
+<td>10.000.000</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Directeur</td>
+<td>Projecten</td>
+<td>Voll. bevoegdheid</td>
+<td>100.000</td>
+<td>Raad van t</td>
+</tr>
+<tr class="row-odd"><td>Piet</td>
+<td>Projecten</td>
+<td>Opdr. proj.gerelateerd</td>
+<td>5.000</td>
+<td>Directeur</td>
+</tr>
+<tr class="row-even"><td>Jan</td>
+<td>Projecten</td>
+<td>Opdr. proj.gerelateerd</td>
+<td>5.000</td>
+<td>Directeur</td>
+</tr>
+<tr class="row-odd"><td>Raad van t</td>
+<td>Jaarplan</td>
+<td>Ongelimiteerd</td>
+<td>10.000.000</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Directeur</td>
+<td>Jaarplan</td>
+<td>Voll. bevoegdheid</td>
+<td>100.000</td>
+<td>Raad van t</td>
+</tr>
+<tr class="row-odd"><td>Afd. hoofd</td>
+<td>Jaarplan</td>
+<td>Afd.hoofd, Opdr. uitv.ge</td>
+<td>10.000</td>
+<td>Directeur</td>
+</tr>
+<tr class="row-even"><td>Sec.hoofd J</td>
+<td>Jaarplan</td>
+<td>Opdr. uitv.gerelateerd</td>
+<td>2.500</td>
+<td>Afd. hoofd</td>
+</tr>
+<tr class="row-odd"><td>Medew. 1</td>
+<td>Jaarplan</td>
+<td>Standaard</td>
+<td>500</td>
+<td>Sec. hoofd</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="inkopen">
+<h2>Inkopen<a class="headerlink" href="#inkopen" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="offerte">
+<h3>Offerte<a class="headerlink" href="#offerte" title="Permalink to this headline">¶</a></h3>
+<p>Ga naar Inkoop/offertes (of /inkooporders) klik [Aanmaken]
+In afwijking op standaard OpenERP wordt de kostenplaats per order bepaald. De gebruiker kan alleen kiezen uit de kostenplaatsen, waarvoor hij procuratie heeft.
+Nadat de orderregels zijn ingevoerd kan de leverancier eerst om een offerte worden gevraagd, waarna de offerte in het systeem kan worden aangepast.
+Als de offerte vaststaat kan deze worden bevestigd: klik [Order goedkeuren].</p>
+<p>Nu worden de procuratieregels toegepast.
+De offerte wordt een inkooporder tenzij de gebruiker onvoldoende procuratie heeft. In dat geval bepaalt het programma wie de hogere in lijn is en de offerte verschijnt in diens lijstje &#8216;goed te keuren&#8217;. Bij afwezigheid kan ook diens manager de offerte goedkeuren.</p>
+</div>
+<div class="section" id="autorisatie">
+<h3>Autorisatie<a class="headerlink" href="#autorisatie" title="Permalink to this headline">¶</a></h3>
+<p>Tabellen
+Nieuw
+Res_procuration_limit
+Res_procuration_limit_user
+Purchase_approval</p>
+<p>Aangepast
+Res_users
+Purchase_order
+Purchase_order_line</p>
+<p>Groepen
+Nieuw
+Procuration_manager</p>
+<p>Aangepast
+Purchase_user</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Procuratie</a><ul>
+<li><a class="reference internal" href="#doel">Doel</a></li>
+<li><a class="reference internal" href="#werkwijze-openerp">Werkwijze OpenERP</a></li>
+<li><a class="reference internal" href="#aanpassing">Aanpassing</a></li>
+<li><a class="reference internal" href="#inrichten">Inrichten</a><ul>
+<li><a class="reference internal" href="#procuratielimieten">Procuratielimieten</a></li>
+<li><a class="reference internal" href="#gebruikersprocuratie">Gebruikersprocuratie</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inkopen">Inkopen</a><ul>
+<li><a class="reference internal" href="#offerte">Offerte</a></li>
+<li><a class="reference internal" href="#autorisatie">Autorisatie</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Purchase_procuration_multi_level&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/procuratie.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Purchase_procuration_multi_level’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Purchase_procuration_multi_level 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Therp.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

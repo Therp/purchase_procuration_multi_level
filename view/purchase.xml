@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <record id="purchase_order_form_approve" model="ir.ui.view">
+            <field name="name">purchase.order.form.approve</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <button name="purchase_cancel" position="replace">
+                    <button name="purchase_cancel" string="Cancel Confirmation"
+						type="object" states="draft"
+						attrs="{'invisible': [('user_approve_id', '=', False)]}"
+					/>
+                </button>
+            	<field name="partner_id" position="before">
+	                <field name="user_approve_id" readonly="1"
+						attrs="{'invisible': ['|',
+								('user_approve_id', '=', False),
+								('state', 'not in', 'draft'),]}"
+					/>
+	                <field name="approval_id" readonly="1"
+						attrs="{'invisible': ['|',
+								('approval_id', '=', False),
+								('state', 'in', 'draft'),
+								]}"
+					/>
+                	<field name="allowed_analytic_ids" invisible="1"/>
+                    <field name="account_analytic_id" required="1"
+                	    on_change="on_change_analytic_id(account_analytic_id)"
+                	    domain="[
+				  			('type', 'not in', ('view','template')),
+							('id', 'in', allowed_analytic_ids and allowed_analytic_ids[0][2]),
+							]"
+						attrs="{'readonly': ['|',
+											 ('user_approve_id', '!=', False),
+											 ('validator', '!=', False),
+											 ]}"
+					/>
+            	</field>
+            	<field name="partner_id" position="attributes">
+                	<attribute name="attrs">{'readonly': ['|',
+											 ('user_approve_id', '!=', False),
+											 ('validator', '!=', False),
+											 ]}
+					</attribute>
+            	</field>
+            	<field name="order_line" position="attributes">
+                	<attribute name="attrs">{'readonly': ['|',
+											 ('user_approve_id', '!=', False),
+											 ('validator', '!=', False),
+											 ]}
+					</attribute>
+            	</field>
+
+                <xpath expr="/form/sheet/notebook/page/field/tree//field[@name='account_analytic_id']" position="replace">
+                </xpath>
+
+                <page string="Purchase Order" position="after">
+                    <page string="Approval" colspan="2">
+                        <group>
+	                		<field name="approved_procuration_limit" readonly="1"/>
+	                		<field name="approval_ids" readonly="1"/>
+	                	</group>
+                	</page>
+                </page>
+
+            </field>
+        </record>
+        
+        <record id="purchase_order_tree_approve" model="ir.ui.view">
+            <field name="name">purchase.order.tree.approve</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree" />
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+            	<field name="state" position="before">
+		            <field name="approval_id"/>
+		        </field>
+	        </field>
+        </record>
+        
+        <record id="view_purchase_order_filter_procuration" model="ir.ui.view">
+            <field name="name">purchase.order.list.select.procuration</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="account_analytic_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_purchase_order_filter_approve" model="ir.ui.view">
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="name">purchase.order.list.select.approve</field>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='approved']" position="after">
+                	<filter name="my_to_approve" string="Rfq's to approve"
+                		domain="[('user_approve_id.id','in', [uid])]"
+                	help="Purchase rfq's to be approved by me."/>
+                	<filter name="my_orders" string="My orders"
+                		domain="[('validator.id','in', [uid])]"
+                	help="My purchase orders."/>
+                </xpath>
+            </field>
+        </record>
+
+		<record id="purchase.purchase_form_action" model="ir.actions.act_window">
+            <field name="context">{"search_default_my_orders": 1,
+            					   "search_default_my_to_approve": 1}</field>
+	        <field name="search_view_id" ref="view_purchase_order_filter_approve"/>
+	    </record>
+
+    </data>
+</openerp>

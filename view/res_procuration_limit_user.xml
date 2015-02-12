@@ -1,0 +1,67 @@
+<openerp>
+	<data>
+        <!-- Procuration limits user -->
+
+        <record id="res_procuration_limit_user_tree_view" model="ir.ui.view">
+            <field name="name">res.procuration.limit.user.tree</field>
+            <field name="model">res.procuration.limit.user</field>
+            <field name="arch" type="xml">
+                <tree string="Users procuration">
+                	<field name="user_id"/>
+	            	<field name="name"/>
+	            	<field name="analytic_id"/>
+	            	<field name="user_manager_id"/>
+	            	<field name="procuration_limit_id"/>
+	            	<field name="procuration_limit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_procuration_limit_user_form_view" model="ir.ui.view">
+            <field name="name">res.procuration.limit.user.form</field>
+            <field name="model">res.procuration.limit.user</field>
+            <field name="arch" type="xml">
+                <form string="Users procuration" version="7.0">
+                  <sheet>
+	                  <group>
+		            	<field name="id" invisible="1"/>
+		            	<field name="user_id" on_change="on_change(
+		           			user_id, analytic_id, procuration_limit_id, user_manager_id)"
+	                    attrs="{'readonly':[
+	                        ('id','=',True),
+	                        ]}"/>
+		            	<field name="name"/>
+		            	<field name="analytic_id" on_change="on_change(
+		           			user_id, analytic_id, procuration_limit_id, user_manager_id)"/>
+		            	<field name="user_manager_id" on_change="on_change(
+		           			user_id, analytic_id, procuration_limit_id, user_manager_id)"/>
+		            	<field name="procuration_limit_id" on_change="on_change(
+		           			user_id, analytic_id, procuration_limit_id, user_manager_id)"/>
+		            	<field name="procuration_limit"/>
+	                  </group>
+	              </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_res_procuration_limit_user_tree" model="ir.actions.act_window">
+            <field name="name">User procurations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.procuration.limit.user</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="res_procuration_limit_user_tree_view"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new user procuration limit.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_res_procuration_limit_user_tree"
+        		id="menu_res_procuration_limit_user_tree"
+        		parent="account.menu_finance_payables"
+        		sequence="132"
+        		groups="account.group_account_manager" />
+
+	</data>
+</openerp>
